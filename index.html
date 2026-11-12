@@ -1,276 +1,257 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sev3nNetworks | Infraestrutura, Software & Design</title>
-  <style>
-    :root {
-      --bg-dark: #090d16;
-      --bg-card: #111827;
-      --border-color: #1f2937;
-      --cyan: #00b4d8;
-      --cyan-light: #38bdf8;
-      --orange: #f97316;
-      --text-main: #f3f4f6;
-      --text-muted: #9ca3af;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sev3nNetworks | Infraestrutura, Redes, POS & Telemetria GPS</title>
+    <style>
+        :root {
+            --bg-dark: #090d16;
+            --card-bg: #111827;
+            --card-border: #1f2937;
+            --cyan: #38bdf8;
+            --cyan-glow: rgba(56, 189, 248, 0.15);
+            --orange: #f97316;
+            --orange-glow: rgba(249, 115, 22, 0.15);
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+        }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background-color: var(--bg-dark);
-      background-image: radial-gradient(circle at 50% 0%, rgba(0, 180, 216, 0.12) 0%, transparent 60%);
-      color: var(--text-main);
-      line-height: 1.6;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(circle at 15% 20%, var(--cyan-glow), transparent 35%),
+                radial-gradient(circle at 85% 80%, var(--orange-glow), transparent 35%);
+            color: var(--text-main);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
 
-    .container {
-      width: 100%;
-      max-width: 1040px;
-      margin: 0 auto;
-      padding: 0 1.5rem;
-    }
+        header {
+            padding: 4rem 1.5rem 2.5rem;
+            text-align: center;
+            max-width: 960px;
+            margin: 0 auto;
+        }
 
-    header {
-      padding: 4.5rem 0 3rem;
-      text-align: center;
-      border-bottom: 1px solid var(--border-color);
-    }
+        .badge {
+            display: inline-block;
+            padding: 0.35rem 0.9rem;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--cyan);
+            background: rgba(56, 189, 248, 0.1);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: 999px;
+            margin-bottom: 1.25rem;
+        }
 
-    .badge {
-      display: inline-block;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-      font-size: 0.8rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--cyan-light);
-      background: rgba(56, 189, 248, 0.1);
-      border: 1px solid rgba(56, 189, 248, 0.3);
-      padding: 0.35rem 0.9rem;
-      border-radius: 999px;
-      margin-bottom: 1.25rem;
-    }
+        h1 {
+            font-size: clamp(2.4rem, 5vw, 3.6rem);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+        }
 
-    h1 {
-      font-size: 2.8rem;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      margin-bottom: 0.75rem;
-    }
+        h1 span.num {
+            color: var(--orange);
+        }
 
-    h1 span {
-      color: var(--orange);
-    }
+        h1 span.net {
+            color: var(--cyan);
+        }
 
-    .subtitle {
-      max-width: 650px;
-      margin: 0 auto 2rem;
-      color: var(--text-muted);
-      font-size: 1.1rem;
-    }
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 680px;
+            margin: 0 auto 2rem;
+        }
 
-    .actions {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
+        .cta-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
 
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.75rem 1.5rem;
-      border-radius: 8px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.2s ease;
-    }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
 
-    .btn-primary {
-      background: var(--cyan);
-      color: #090d16;
-    }
+        .btn-primary {
+            background: var(--orange);
+            color: #fff;
+            box-shadow: 0 4px 14px rgba(249, 115, 22, 0.35);
+        }
 
-    .btn-primary:hover {
-      background: var(--cyan-light);
-      transform: translateY(-1px);
-    }
+        .btn-primary:hover {
+            background: #ea580c;
+            transform: translateY(-1px);
+        }
 
-    .btn-secondary {
-      background: var(--bg-card);
-      color: var(--text-main);
-      border: 1px solid var(--border-color);
-    }
+        .btn-secondary {
+            background: var(--card-bg);
+            color: var(--text-main);
+            border: 1px solid var(--card-border);
+        }
 
-    .btn-secondary:hover {
-      border-color: var(--orange);
-      color: var(--orange);
-    }
+        .btn-secondary:hover {
+            border-color: var(--cyan);
+            color: var(--cyan);
+        }
 
-    main {
-      padding: 3.5rem 0;
-      flex: 1;
-    }
+        main {
+            flex: 1;
+            max-width: 1060px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 1.5rem 1.5rem 4rem;
+        }
 
-    .section-title {
-      font-size: 1.35rem;
-      margin-bottom: 1.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
+        .section-title {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: 1.25rem;
+            border-left: 3px solid var(--orange);
+            padding-left: 0.75rem;
+        }
 
-    .section-title::before {
-      content: "";
-      display: inline-block;
-      width: 4px;
-      height: 1.35rem;
-      background: var(--orange);
-      border-radius: 2px;
-    }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+            gap: 1.25rem;
+            margin-bottom: 3rem;
+        }
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.25rem;
-      margin-bottom: 3.5rem;
-    }
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 1.6rem;
+            transition: border-color 0.2s ease, transform 0.2s ease;
+        }
 
-    .card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 1.5rem;
-      transition: border-color 0.2s ease;
-    }
+        .card:hover {
+            border-color: rgba(56, 189, 248, 0.45);
+            transform: translateY(-2px);
+        }
 
-    .card:hover {
-      border-color: var(--cyan);
-    }
+        .card-tag {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--orange);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
 
-    .card-tag {
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-      font-size: 0.75rem;
-      color: var(--orange);
-      text-transform: uppercase;
-      margin-bottom: 0.5rem;
-      display: block;
-    }
+        .card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.6rem;
+            color: #fff;
+        }
 
-    .card h3 {
-      font-size: 1.2rem;
-      margin-bottom: 0.5rem;
-      color: var(--text-main);
-    }
+        .card p {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+        }
 
-    .card p {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-    }
+        footer {
+            border-top: 1px solid var(--card-border);
+            padding: 1.75rem 1.5rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
 
-    .project-card {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
+        footer a {
+            color: var(--cyan);
+            text-decoration: none;
+        }
 
-    .project-link {
-      margin-top: 1.25rem;
-      display: inline-block;
-      color: var(--cyan-light);
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 0.9rem;
-    }
-
-    .project-link:hover {
-      text-decoration: underline;
-    }
-
-    footer {
-      border-top: 1px solid var(--border-color);
-      padding: 2rem 0;
-      text-align: center;
-      color: var(--text-muted);
-      font-size: 0.9rem;
-    }
-
-    footer a {
-      color: var(--cyan-light);
-      text-decoration: none;
-    }
-  </style>
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
 
-  <header>
-    <div class="container">
-      <div class="badge">Sev3nNetworks // Ecossistema Tecnológico</div>
-      <h1>Sev3n<span>Networks</span></h1>
-      <p class="subtitle">
-        Infraestrutura de redes, alojamento web, desenvolvimento de software open-source e soluções digitais integradas.
-      </p>
-      <div class="actions">
-        <a href="https://github.com/Sev3nNetworks" target="_blank" rel="noopener" class="btn btn-primary">
-          Explorar no GitHub
-        </a>
-        <a href="mailto:pedrolrneves@sev3nnetworks.com" class="btn btn-secondary">
-          Contacto Profissional
-        </a>
-      </div>
-    </div>
-  </header>
-
-  <main class="container">
-    <h2 class="section-title">Divisões do Grupo</h2>
-    <div class="grid">
-      <div class="card">
-        <span class="card-tag">Infraestrutura & Cloud</span>
-        <h3>Sev3nHost</h3>
-        <p>Alojamento web de alta performance, servidores VPS, gestão de zonas DNS, nameservers dedicados e suporte técnico.</p>
-      </div>
-      <div class="card">
-        <span class="card-tag">Engenharia & Código</span>
-        <h3>Sev3nSoftware</h3>
-        <p>Desenvolvimento de aplicações, scripts de automação, agentes de telemetria de hardware e utilitários multiplataforma.</p>
-      </div>
-      <div class="card">
-        <span class="card-tag">Web & Identidade</span>
-        <h3>Sev3nDesign</h3>
-        <p>Criação de websites modernos, interfaces UI/UX, identidade visual de marcas e soluções digitais à medida.</p>
-      </div>
-    </div>
-
-    <h2 class="section-title">Projetos em Destaque</h2>
-    <div class="grid">
-      <div class="card project-card">
-        <div>
-          <span class="card-tag">Open-Source · Python / Windows & Linux</span>
-          <h3>Sev3n-MetricsBridge</h3>
-          <p>Ponte ultraleve de telemetria de hardware e exportador JSON em tempo real para Windows e servidores Linux, compatível com OHMClient, Rainmeter e dashboards web.</p>
+    <header>
+        <div class="badge">Ecossistema Tecnológico &amp; Infraestrutura</div>
+        <h1>Sev<span class="num">3</span>n<span class="net">Networks</span></h1>
+        <p class="subtitle">
+            Consultoria em TI, arquitetura de redes locais, sistemas POS, rastreamento GPS em tempo real, alojamento cloud e desenvolvimento de software.
+        </p>
+        <div class="cta-group">
+            <a href="mailto:pedrolrneves@sev3nnetworks.com" class="btn btn-primary">Contactar Consultoria</a>
+            <a href="https://github.com/Sev3nNetworks" target="_blank" rel="noopener" class="btn btn-secondary">GitHub Oficial</a>
         </div>
-        <a href="https://github.com/Sev3nNetworks/Sev3n-MetricsBridge" target="_blank" rel="noopener" class="project-link">
-          Ver repositório no GitHub →
-        </a>
-      </div>
-    </div>
-  </main>
+    </header>
 
-  <footer>
-    <div class="container">
-      <p>© 2026 <strong>Sev3nNetworks</strong> · Desenvolvido por <a href="https://github.com/petrussev3n" target="_blank" rel="noopener">Pedro Neves (@petrussev3n)</a></p>
-    </div>
-  </footer>
+    <main>
+        <div class="section-title">Soluções Operacionais • Sev3nNetworks</div>
+        <div class="grid">
+            <div class="card">
+                <span class="card-tag">Redes &amp; Comércio</span>
+                <h3>Infraestrutura TI &amp; Sistemas POS</h3>
+                <p>Estruturação de redes cabladas e Wi-Fi corporativo, videovigilância (CCTV) e implementação completa de pontos de venda (POS) para restauração e retalho.</p>
+            </div>
+
+            <div class="card">
+                <span class="card-tag">Telemetria &amp; Mobilidade</span>
+                <h3>GPS Tracking &amp; Monitorização</h3>
+                <p>Plataforma de localização e rastreamento GPS em tempo real para frotas, viaturas e ativos, com conectividade multi-operador e histórico de rotas.</p>
+            </div>
+        </div>
+
+        <div class="section-title">Divisões do Grupo</div>
+        <div class="grid">
+            <div class="card">
+                <span class="card-tag">Infraestrutura Cloud</span>
+                <h3>Sev3nHost</h3>
+                <p>Alojamento web de alta disponibilidade, e-mail corporativo, instâncias VPS, servidores dedicados e gestão de domínios e DNS.</p>
+            </div>
+
+            <div class="card">
+                <span class="card-tag">Engenharia &amp; Código</span>
+                <h3>Sev3nSoftware</h3>
+                <p>Desenvolvimento de aplicações, agentes de telemetria de hardware (Sev3n-MetricsBridge) e ferramentas open-source para Windows e Linux.</p>
+            </div>
+
+            <div class="card">
+                <span class="card-tag">Identidade &amp; Web</span>
+                <h3>Sev3nDesign</h3>
+                <p>Criação de websites institucionais, interfaces UI/UX, identidade visual e soluções digitais à medida para empresas.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        &copy; 2026 <strong>Sev3nNetworks</strong> — Pedro Neves &bull; <a href="mailto:pedrolrneves@sev3nnetworks.com">pedrolrneves@sev3nnetworks.com</a>
+    </footer>
 
 </body>
 </html>
