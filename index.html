@@ -3,254 +3,312 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sev3nNetworks | Infraestrutura, Redes, POS & Telemetria GPS</title>
+    <title>Sev3nNetworks | Infraestrutura TI, POS, GPS Tracking & Cloud</title>
     <style>
         :root {
-            --bg-dark: #090d16;
-            --card-bg: #111827;
-            --card-border: #1f2937;
-            --cyan: #38bdf8;
-            --cyan-glow: rgba(56, 189, 248, 0.15);
+            --bg: #070b14;
+            --surface: #0f172a;
+            --surface-hover: #162038;
+            --border: #1e293b;
             --orange: #f97316;
-            --orange-glow: rgba(249, 115, 22, 0.15);
-            --text-main: #f3f4f6;
-            --text-muted: #9ca3af;
+            --cyan: #38bdf8;
+            --text: #f8fafc;
+            --muted: #94a3b8;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-dark);
-            background-image: 
-                radial-gradient(circle at 15% 20%, var(--cyan-glow), transparent 35%),
-                radial-gradient(circle at 85% 80%, var(--orange-glow), transparent 35%);
-            color: var(--text-main);
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
             line-height: 1.6;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
         }
 
-        header {
-            padding: 4rem 1.5rem 2.5rem;
-            text-align: center;
-            max-width: 960px;
+        .container {
+            max-width: 1100px;
             margin: 0 auto;
+            padding: 0 1.5rem;
         }
 
-        .badge {
-            display: inline-block;
-            padding: 0.35rem 0.9rem;
-            font-size: 0.78rem;
-            font-weight: 600;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: var(--cyan);
-            background: rgba(56, 189, 248, 0.1);
-            border: 1px solid rgba(56, 189, 248, 0.3);
+        /* Hero / Cabeçalho */
+        header {
+            padding: 4.5rem 0 3.5rem;
+            border-bottom: 1px solid var(--border);
+            background: radial-gradient(circle at top right, rgba(249, 115, 22, 0.12), transparent 45%),
+                        radial-gradient(circle at top left, rgba(56, 189, 248, 0.12), transparent 45%);
+        }
+
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(249, 115, 22, 0.12);
+            border: 1px solid rgba(249, 115, 22, 0.35);
+            color: var(--orange);
+            padding: 0.3rem 0.85rem;
             border-radius: 999px;
-            margin-bottom: 1.25rem;
-        }
-
-        h1 {
-            font-size: clamp(2.4rem, 5vw, 3.6rem);
-            font-weight: 800;
-            letter-spacing: -0.02em;
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
             margin-bottom: 1rem;
         }
 
-        h1 span.num {
-            color: var(--orange);
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 3.8rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            margin-bottom: 0.75rem;
         }
 
-        h1 span.net {
-            color: var(--cyan);
+        h1 .n3 { color: var(--orange); }
+        h1 .net { color: var(--cyan); }
+
+        .lead {
+            font-size: 1.12rem;
+            color: var(--muted);
+            max-width: 720px;
+            margin-bottom: 2rem;
         }
 
-        .subtitle {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            max-width: 680px;
-            margin: 0 auto 2rem;
-        }
-
-        .cta-group {
+        .actions {
             display: flex;
             gap: 1rem;
-            justify-content: center;
             flex-wrap: wrap;
         }
 
         .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.75rem 1.5rem;
+            padding: 0.75rem 1.4rem;
             border-radius: 8px;
             font-weight: 600;
             font-size: 0.95rem;
             text-decoration: none;
-            transition: all 0.2s ease;
+            transition: 0.2s;
         }
 
-        .btn-primary {
+        .btn-orange {
             background: var(--orange);
             color: #fff;
-            box-shadow: 0 4px 14px rgba(249, 115, 22, 0.35);
         }
 
-        .btn-primary:hover {
-            background: #ea580c;
-            transform: translateY(-1px);
+        .btn-orange:hover { background: #ea580c; }
+
+        .btn-outline {
+            border: 1px solid var(--border);
+            color: var(--text);
+            background: var(--surface);
         }
 
-        .btn-secondary {
-            background: var(--card-bg);
-            color: var(--text-main);
-            border: 1px solid var(--card-border);
-        }
-
-        .btn-secondary:hover {
+        .btn-outline:hover {
             border-color: var(--cyan);
             color: var(--cyan);
         }
 
-        main {
-            flex: 1;
-            max-width: 1060px;
-            width: 100%;
-            margin: 0 auto;
-            padding: 1.5rem 1.5rem 4rem;
+        /* Secções */
+        section { padding: 3.5rem 0; }
+
+        .sec-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.75rem;
+            border-left: 4px solid var(--orange);
+            padding-left: 0.9rem;
         }
 
-        .section-title {
-            font-size: 0.85rem;
+        .sec-header h2 {
+            font-size: 1.35rem;
+            font-weight: 700;
+        }
+
+        .sec-header span {
+            font-size: 0.8rem;
+            color: var(--muted);
             text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--text-muted);
-            margin-bottom: 1.25rem;
-            border-left: 3px solid var(--orange);
-            padding-left: 0.75rem;
+            letter-spacing: 0.06em;
         }
 
-        .grid {
+        /* Grelha Casa-Mãe (2 colunas destaque) */
+        .grid-main {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-            gap: 1.25rem;
-            margin-bottom: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
         }
 
-        .card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 12px;
-            padding: 1.6rem;
-            transition: border-color 0.2s ease, transform 0.2s ease;
+        .card-highlight {
+            background: linear-gradient(145deg, var(--surface), #0b1120);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1.8rem;
+            position: relative;
         }
 
-        .card:hover {
-            border-color: rgba(56, 189, 248, 0.45);
-            transform: translateY(-2px);
+        .card-highlight.gps {
+            border-color: rgba(56, 189, 248, 0.4);
         }
 
-        .card-tag {
+        .status-tag {
+            display: inline-block;
             font-size: 0.72rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.06em;
+            padding: 0.2rem 0.6rem;
+            border-radius: 6px;
+            margin-bottom: 0.85rem;
+            background: rgba(56, 189, 248, 0.15);
+            color: var(--cyan);
+        }
+
+        .card-highlight h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.65rem;
+        }
+
+        .card-highlight p {
+            color: var(--muted);
+            font-size: 0.95rem;
+            margin-bottom: 1.1rem;
+        }
+
+        .specs {
+            list-style: none;
+            font-size: 0.86rem;
+            color: #cbd5e1;
+            border-top: 1px solid var(--border);
+            padding-top: 0.9rem;
+        }
+
+        .specs li { margin-bottom: 0.35rem; }
+        .specs li::before {
+            content: "▹ ";
             color: var(--orange);
-            margin-bottom: 0.5rem;
-            display: block;
+            font-weight: bold;
         }
 
-        .card h3 {
-            font-size: 1.2rem;
-            margin-bottom: 0.6rem;
-            color: #fff;
+        /* Grelha Divisões (3 colunas) */
+        .grid-divisions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.25rem;
         }
 
-        .card p {
-            font-size: 0.92rem;
-            color: var(--text-muted);
+        .card-div {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .card-div small {
+            color: var(--orange);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.72rem;
+            letter-spacing: 0.05em;
+        }
+
+        .card-div h3 {
+            font-size: 1.18rem;
+            margin: 0.35rem 0 0.6rem;
+        }
+
+        .card-div p {
+            font-size: 0.9rem;
+            color: var(--muted);
         }
 
         footer {
-            border-top: 1px solid var(--card-border);
-            padding: 1.75rem 1.5rem;
+            border-top: 1px solid var(--border);
+            padding: 2rem 0;
             text-align: center;
             font-size: 0.85rem;
-            color: var(--text-muted);
+            color: var(--muted);
         }
 
-        footer a {
-            color: var(--cyan);
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-        }
+        footer a { color: var(--cyan); text-decoration: none; }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="badge">Ecossistema Tecnológico &amp; Infraestrutura</div>
-        <h1>Sev<span class="num">3</span>n<span class="net">Networks</span></h1>
-        <p class="subtitle">
-            Consultoria em TI, arquitetura de redes locais, sistemas POS, rastreamento GPS em tempo real, alojamento cloud e desenvolvimento de software.
-        </p>
-        <div class="cta-group">
-            <a href="mailto:pedrolrneves@sev3nnetworks.com" class="btn btn-primary">Contactar Consultoria</a>
-            <a href="https://github.com/Sev3nNetworks" target="_blank" rel="noopener" class="btn btn-secondary">GitHub Oficial</a>
+        <div class="container">
+            <div class="pill">Grupo Tecnológico • Infraestrutura &amp; Soluções</div>
+            <h1>Sev<span class="n3">3</span>n<span class="net">Networks</span></h1>
+            <p class="lead">
+                Consultoria em TI, arquitetura de redes empresariais, sistemas POS, rastreamento GPS em tempo real, alojamento cloud e engenharia de software.
+            </p>
+            <div class="actions">
+                <a href="mailto:pedrolrneves@sev3nnetworks.com" class="btn btn-orange">pedrolrneves@sev3nnetworks.com</a>
+                <a href="https://github.com/Sev3nNetworks" target="_blank" rel="noopener" class="btn btn-outline">GitHub Sev3nNetworks</a>
+            </div>
         </div>
     </header>
 
-    <main>
-        <div class="section-title">Soluções Operacionais • Sev3nNetworks</div>
-        <div class="grid">
-            <div class="card">
-                <span class="card-tag">Redes &amp; Comércio</span>
-                <h3>Infraestrutura TI &amp; Sistemas POS</h3>
-                <p>Estruturação de redes cabladas e Wi-Fi corporativo, videovigilância (CCTV) e implementação completa de pontos de venda (POS) para restauração e retalho.</p>
+    <main class="container">
+        <!-- Área Direta da Casa-Mãe -->
+        <section>
+            <div class="sec-header">
+                <h2>Operações &amp; Serviços • Sev3nNetworks</h2>
+                <span>Casa-Mãe</span>
             </div>
+            <div class="grid-main">
+                <div class="card-highlight">
+                    <span class="status-tag">Infraestrutura &amp; Comércio</span>
+                    <h3>Redes TI, CCTV &amp; Sistemas POS</h3>
+                    <p>Implementação e manutenção técnica de redes locais, equipamentos de ponto de venda (POS) e videovigilância para restauração e retalho.</p>
+                    <ul class="specs">
+                        <li>Redes cabladas, switches, Wi-Fi e segurança</li>
+                        <li>Sistemas POS, impressoras térmicas e back-office</li>
+                        <li>Suporte lógico e manutenção contínua de TI</li>
+                    </ul>
+                </div>
 
-            <div class="card">
-                <span class="card-tag">Telemetria &amp; Mobilidade</span>
-                <h3>GPS Tracking &amp; Monitorização</h3>
-                <p>Plataforma de localização e rastreamento GPS em tempo real para frotas, viaturas e ativos, com conectividade multi-operador e histórico de rotas.</p>
+                <div class="card-highlight gps">
+                    <span class="status-tag">Novo Projeto • Telemetria</span>
+                    <h3>GPS Tracking &amp; Localização</h3>
+                    <p>Serviço dedicado de rastreamento e monitorização GPS em tempo real para frotas, viaturas e equipamentos móveis sob a rede Sev3nNetworks.</p>
+                    <ul class="specs">
+                        <li>Monitorização em direto, histórico de rotas e alertas</li>
+                        <li>Conectividade móvel M2M / IoT multi-operador</li>
+                        <li>Acesso web e móvel para gestão de frota</li>
+                    </ul>
+                </div>
             </div>
-        </div>
+        </section>
 
-        <div class="section-title">Divisões do Grupo</div>
-        <div class="grid">
-            <div class="card">
-                <span class="card-tag">Infraestrutura Cloud</span>
-                <h3>Sev3nHost</h3>
-                <p>Alojamento web de alta disponibilidade, e-mail corporativo, instâncias VPS, servidores dedicados e gestão de domínios e DNS.</p>
+        <!-- Divisões Especializadas -->
+        <section style="padding-top: 0;">
+            <div class="sec-header">
+                <h2>Divisões do Ecossistema</h2>
+                <span>Unidades Especializadas</span>
             </div>
+            <div class="grid-divisions">
+                <div class="card-div">
+                    <small>Cloud &amp; Infraestrutura</small>
+                    <h3>Sev3nHost</h3>
+                    <p>Alojamento web, e-mail corporativo, instâncias VPS, servidores dedicados e gestão de domínios e DNS.</p>
+                </div>
 
-            <div class="card">
-                <span class="card-tag">Engenharia &amp; Código</span>
-                <h3>Sev3nSoftware</h3>
-                <p>Desenvolvimento de aplicações, agentes de telemetria de hardware (Sev3n-MetricsBridge) e ferramentas open-source para Windows e Linux.</p>
-            </div>
+                <div class="card-div">
+                    <small>Engenharia &amp; Código</small>
+                    <h3>Sev3nSoftware</h3>
+                    <p>Desenvolvimento de software, ferramentas de telemetria de sistema (Sev3n-MetricsBridge) e utilitários open-source.</p>
+                </div>
 
-            <div class="card">
-                <span class="card-tag">Identidade &amp; Web</span>
-                <h3>Sev3nDesign</h3>
-                <p>Criação de websites institucionais, interfaces UI/UX, identidade visual e soluções digitais à medida para empresas.</p>
+                <div class="card-div">
+                    <small>Web &amp; Identidade</small>
+                    <h3>Sev3nDesign</h3>
+                    <p>Criação de websites modernos, design UI/UX, identidade visual e presença digital para empresas.</p>
+                </div>
             </div>
-        </div>
+        </section>
     </main>
 
     <footer>
-        &copy; 2026 <strong>Sev3nNetworks</strong> — Pedro Neves &bull; <a href="mailto:pedrolrneves@sev3nnetworks.com">pedrolrneves@sev3nnetworks.com</a>
+        <div class="container">
+            &copy; 2026 <strong>Sev3nNetworks</strong> — Pedro Neves &bull; <a href="mailto:pedrolrneves@sev3nnetworks.com">pedrolrneves@sev3nnetworks.com</a>
+        </div>
     </footer>
 
 </body>
